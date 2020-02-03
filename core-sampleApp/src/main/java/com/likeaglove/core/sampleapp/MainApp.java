@@ -1,4 +1,4 @@
-package com.ikeaglove.core.sampleapp;
+package com.likeaglove.core.sampleapp;
 
 import java.util.Comparator;
 import java.util.List;

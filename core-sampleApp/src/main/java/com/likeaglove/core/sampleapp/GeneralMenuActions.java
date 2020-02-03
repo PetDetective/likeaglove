@@ -1,4 +1,4 @@
-package com.ikeaglove.core.sampleapp;
+package com.likeaglove.core.sampleapp;
 
 /**
  * The general menu actions for the console wizard
