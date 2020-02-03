@@ -30,7 +30,7 @@ public class MainApp {
 		ParkingConfiguration parkingConfiguration = ParkingConfiguration.newBuilder().withSimplePricePolicy(10, 3)
 				.addSlots().addRange(SlotType.Standard, 5).addRange(SlotType.Electric_20, 8)
 				.addRange(SlotType.Electric_50, 8).rangeSlotsDone().build();
-		ParkingManager parkingManager = ParkingManagerServiceLoader.provider().create(parkingConfiguration);
+		ParkingManager parkingManager = ParkingManagerServiceLoader.providers().get(0).create(parkingConfiguration);
 		TextIO textIO = TextIoFactory.getTextIO();
 		boolean stayInApp = true;
 		do {

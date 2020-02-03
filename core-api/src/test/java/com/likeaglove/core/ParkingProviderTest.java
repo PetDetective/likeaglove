@@ -25,16 +25,10 @@ class ParkingProviderTest {
 
 	@Test
 	void testProviderString() {
-		ParkingManagerProvider dummyProvider = ParkingManagerServiceLoader.provider(DummyServiceProvider.class.getName());
+		ParkingManagerProvider dummyProvider = ParkingManagerServiceLoader
+				.provider(DummyServiceProvider.class.getName());
 		assertNotNull(dummyProvider);
 		assertEquals(DummyServiceProvider.class.toString(), dummyProvider.getClass().toString());
-	}
-
-	@Test
-	void testProvider() {
-		assertThrows(ProviderNotFoundException.class, () -> {
-			ParkingManagerServiceLoader.provider();
-		});
 	}
 
 }

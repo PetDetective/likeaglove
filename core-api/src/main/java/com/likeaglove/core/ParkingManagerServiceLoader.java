@@ -19,8 +19,6 @@ import com.likeaglove.core.spi.ParkingManagerProvider;
  */
 public class ParkingManagerServiceLoader {
 
-	private static final String DEFAULT_PROVIDER = "com.likeaglove.core.impl.InMemoryParkingProvider";
-
 	/**
 	 * List all the services of type {@link ParkingManagerProvider}.
 	 * 
@@ -33,15 +31,6 @@ public class ParkingManagerServiceLoader {
 			services.add(provider);
 		});
 		return services;
-	}
-
-	/**
-	 * Get a basic service
-	 * 
-	 * @return a default service implementing {@link ParkingManagerProvider}
-	 */
-	public static ParkingManagerProvider provider() {
-		return provider(DEFAULT_PROVIDER);
 	}
 
 	/**
