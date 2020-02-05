@@ -24,6 +24,7 @@ import com.likeaglove.core.quarkus.entity.ParkingSlotEntity;
 
 /**
  * A hibernate implementation of a ParkingManager
+ * 
  * @author AceVentura
  *
  */
@@ -32,18 +33,35 @@ public class ParkingController implements ParkingManager {
 
 	private PricingPolicy pricingPolicy;
 
+	/**
+	 * Configuration property for the number of standard slots in this parking
+	 */
 	@ConfigProperty(name = "slot.standard.size", defaultValue = "5")
 	public int standardSlotSize;
 
+	/**
+	 * Configuration property for the number of electric slots with 20kW power
+	 * supply in this parking
+	 */
 	@ConfigProperty(name = "slot.electric20.size", defaultValue = "7")
 	public int electric20SlotSize;
 
+	/**
+	 * Configuration property for the number of electric slots with 50kW power
+	 * supply in this parking
+	 */
 	@ConfigProperty(name = "slot.electric50.size", defaultValue = "9")
 	public int electric50SlotSize;
-
+	
+	/**
+	 * Configuration property for the fixed amount of a simple pricing policy
+	 */
 	@ConfigProperty(name = "policy.fixedAmount", defaultValue = "10")
 	public int fixedAmount;
 
+	/**
+	 * Configuration property for the rate by hour of a simple pricing policy
+	 */
 	@ConfigProperty(name = "policy.rateByHour", defaultValue = "10")
 	public int rateByHour;
 
@@ -56,9 +74,9 @@ public class ParkingController implements ParkingManager {
 	@Transactional
 	public void prepareParking() {
 		ParkingConfiguration configuration = ParkingConfiguration.newBuilder()
-				.withSimplePricePolicy(fixedAmount, rateByHour).addSlots()
-				.addRange(SlotType.Standard, standardSlotSize).addRange(SlotType.Electric_20, electric20SlotSize)
-				.addRange(SlotType.Electric_50, electric50SlotSize).rangeSlotsDone().build();
+				.withSimplePricePolicy(fixedAmount, rateByHour).addSlots().addRange(SlotType.Standard, standardSlotSize)
+				.addRange(SlotType.Electric_20, electric20SlotSize).addRange(SlotType.Electric_50, electric50SlotSize)
+				.rangeSlotsDone().build();
 		this.pricingPolicy = configuration.getPricingPolicy();
 		// Part to rewrite using streams
 		for (Entry<SlotType, Integer> entry : configuration.getRangeSlotByType().entrySet()) {

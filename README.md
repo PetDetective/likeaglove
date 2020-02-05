@@ -1,33 +1,100 @@
 # 'Like a glove' Parking
 
-You always dreamed about parking like Ace Ventura in Pet Detective movie ?? [see reference](https://www.youtube.com/watch?v=3nOxdKcqC_I)
+You always dreamed about parking like Ace Ventura in Pet Detective movie ([see reference](https://www.youtube.com/watch?v=3nOxdKcqC_I)) ?
 
 Stop kidding: Like a glove parking is a Java API to control a toll parking.
 
-## Getting Started
+The project is composed of the following modules:
+- core-api: generic contract definition of the Toll Parking API; with SPI mechanism to inject a custom implementation at runtime.
+- core-impl:  a "no nano bullshit" technology implementation. Basic, in memory implementation of the core-api. 
+- core-sampleApp: a sample application showcasing the SPI mechanism of the core-api by using the core-impl at runtime only. This application interacts directly in a terminal.
+- core-quarkus: a sample application based on Quarkus (for compilation and various bundled APIs); providing another implementation of the core-api with Hibernate and Panache and exposing some http rest services.
 
-We have defined a core-api that will let your applicative code implementation agnostic.
-It provides a basic implementation (in-memory) and a sample application (terminal based).
+## Getting Started
 
 ### Prerequisites
 
 Java 11+
 
-### Installing
+### Installing the core-sampleApp
 
-Build the code with
+core-api; core-impl and core-sampleApp can be compiled in one shot via the following command:
 
 ```
 mvnw clean install
 ```
 
-Run application with
+Run the core-sampleApp application with
 
 ```
 java -jar core-sampleApp\target\core-sampleApp-0.0.1-SNAPSHOT.jar
 ```
 
-## Integration in other projects
+You will get in your terminal and interactive wizard:
+
+```
+What do you want to do?
+  1: Park a car
+  2: Unpark a car
+  3: Display parking map
+  4: Close the application
+Enter your choice: 3
++-----------------+------------------+--------+--------------+
+|    Slot Name    |       Type       | Status | Registration |
++-----------------+------------------+--------+--------------+
+| Electric_20 1   | Electric Car 20k |  Free  | -            |
+| Electric_20 2   | Electric Car 20k |  Free  | -            |
+| Electric_20 3   | Electric Car 20k |  Free  | -            |
+| Electric_20 4   | Electric Car 20k |  Free  | -            |
+| Electric_20 5   | Electric Car 20k |  Free  | -            |
+| Electric_20 6   | Electric Car 20k |  Free  | -            |
+| Electric_20 7   | Electric Car 20k |  Free  | -            |
+| Electric_20 8   | Electric Car 20k |  Free  | -            |
+| Electric_50 1   | Electric Car 50k |  Free  | -            |
+| Electric_50 2   | Electric Car 50k |  Free  | -            |
+| Electric_50 3   | Electric Car 50k |  Free  | -            |
+| Electric_50 4   | Electric Car 50k |  Free  | -            |
+| Electric_50 5   | Electric Car 50k |  Free  | -            |
+| Electric_50 6   | Electric Car 50k |  Free  | -            |
+| Electric_50 7   | Electric Car 50k |  Free  | -            |
+| Electric_50 8   | Electric Car 50k |  Free  | -            |
+| Standard 1      | Gasoline powered |  Free  | -            |
+| Standard 2      | Gasoline powered |  Free  | -            |
+| Standard 3      | Gasoline powered |  Free  | -            |
+| Standard 4      | Gasoline powered |  Free  | -            |
+| Standard 5      | Gasoline powered |  Free  | -            |
++-----------------+------------------+--------+--------------+
+```
+
+### Installing the core-quarkus sample
+
+In the root folder of the project run the compilation of the project:
+
+```
+mvnw clean install
+```
+
+then go inside the core-quarkus folder
+
+```
+cd core-quarkus
+```
+
+package the application
+
+```
+..\mvnw package
+```
+
+start the application
+
+```
+java -jar target/core-quarkus-0.0.1-SNAPSHOT-runner.jar
+```
+
+You can find more details on how to use the core-quarkus application or alternative deployment modes in core-quarkus/README.md
+
+## Integration in other projects of core-api and core-impl
 
 ### Maven coordinates
 
@@ -66,13 +133,9 @@ ParkingConfiguration.newBuilder().withSimplePricePolicy(10, 3)
 
 Based on SPI; you can provide your own implementation via 'META-INF/services/com.likeaglove.core.spi.ParkingManagerProvider' and defining the fully qualified name.
 
-## Trial of Quarkus and REST Api
-
-please look at the folder core-quarkus to find an alternative implementation based on Quarkus and hibernate, more details in core-quarkus/README.md
-
 ## Built With
 
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [Quarkus](https://quarkus.io) - Supersonic Subatomic Java
-* [Maven Wrapper](https://github.com/takari/maven-wrapper)
+* [Maven Wrapper](https://github.com/takari/maven-wrapper) - Maven wrapper
 
