@@ -11,14 +11,14 @@ It provides a basic implementation (in-memory) and a sample application (termina
 
 ### Prerequisites
 
-Java 11+ & Maven
+Java 11+
 
 ### Installing
 
 Build the code with
 
 ```
-mvn clean install
+mvnw clean install
 ```
 
 Run application with
@@ -66,7 +66,13 @@ ParkingConfiguration.newBuilder().withSimplePricePolicy(10, 3)
 
 Based on SPI; you can provide your own implementation via 'META-INF/services/com.likeaglove.core.spi.ParkingManagerProvider' and defining the fully qualified name.
 
+## Trial of Quarkus and REST Api
+
+please look at the folder core-quarkus to find an alternative implementation based on Quarkus and hibernate, more details in core-quarkus/README.md
+
 ## Built With
 
 * [Maven](https://maven.apache.org/) - Dependency Management
+* [Quarkus](https://quarkus.io) - Supersonic Subatomic Java
+* [Maven Wrapper](https://github.com/takari/maven-wrapper)
 
